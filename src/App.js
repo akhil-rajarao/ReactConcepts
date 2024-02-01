@@ -6,6 +6,7 @@ import Home, { LeftComponent, RightComponent } from "./components/Home";
 import Page from "./components/Page";
 import ContactUs from "./components/ContactUs";
 import About from "./components/About";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   function Headerss() {
@@ -53,6 +54,7 @@ function App() {
           <Route
             path="/about"
             element={<About />}></Route>
+            <Route path="*" element={<ErrorPage/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
