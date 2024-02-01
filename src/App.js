@@ -45,7 +45,7 @@ function App() {
             />
           </Route>
           <Route
-            path="/page"
+            path="/page/:id/:index"
             element={<Page />}></Route>
           <Route
             path="/contact"
