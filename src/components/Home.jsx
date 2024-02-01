@@ -5,8 +5,9 @@ import { Link, Outlet } from "react-router-dom";
 
 export default function Home() {
   const ele = useRef(null);
+  const paragraphs = useRef([]);
   return (
-    <>
+    <div className="w-50 border border-primary shadow box-shadow">
       <h1 ref={ele}>Home</h1>
       <button
         onClick={() => {
@@ -21,8 +22,12 @@ export default function Home() {
       <Link to="right">
         <button>Right</button>
       </Link>
+      <p>text1</p>
+      <p>text2</p>
+      <p>text3</p>
+      <p>text4</p>
       <Outlet />
-    </>
+    </div>
   );
 }
 
