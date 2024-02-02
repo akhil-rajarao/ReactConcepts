@@ -1,6 +1,6 @@
 /** @format */
 
-import React, {    useRef } from "react";
+import React, { useRef } from "react";
 import { Link, Outlet } from "react-router-dom";
 import GetapiHook from "../utilities/GetapiHook";
 
@@ -17,12 +17,11 @@ export default function Home() {
   //   GetData();
   // }, []);
 
-  const productsList= GetapiHook("https://fakestoreapi.com/products")
+  const productsList = GetapiHook("https://fakestoreapi.com/products");
 
   const ChangeStyling = (e) => {
     for (let x of ptags.current) {
       x.classList.remove("text-danger");
-      console.log(x.classList);
       x.classList.add("text-secondary");
       x.classList.remove("bg-info");
     }
@@ -33,7 +32,7 @@ export default function Home() {
   const ProductsMapping = () => {
     return productsList.map((item, index) => (
       <p
-        className="mt-2 text-secondary cursor-pointer"
+        className="mt-2 text-secondary cursor-pointer" key={index}
         ref={(el) => (ptags.current[index] = el)}
         onClick={(p) => ChangeStyling(p)}>
         {item?.title}

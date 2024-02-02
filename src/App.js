@@ -9,6 +9,7 @@ import About from "./components/About";
 import ErrorPage from "./components/ErrorPage";
 
 function App() {
+
   function Headerss() {
     return (
       <div className="d-flex gap-3 mt-3 justify-content-center">
@@ -54,7 +55,9 @@ function App() {
           <Route
             path="/about"
             element={<About />}></Route>
-            <Route path="*" element={<ErrorPage/>}></Route>
+          <Route
+            path="*"
+            element={<ErrorPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
