@@ -5,9 +5,22 @@ import { Link, Outlet } from "react-router-dom";
 
 export default function Home() {
   const ele = useRef(null);
-  const paragraphs = useRef([]);
+  const ptags = useRef([]);
+
+  const ChangeStyling = (e) => {
+    for (let x of ptags.current) {
+      x.classList.remove("text-danger");
+      console.log(x.classList);
+      x.classList.add("text-primary");
+      x.classList.remove("bg-info");
+    }
+    e.target.classList.remove("text-primary");
+    e.target.classList.add("text-danger");
+    e.target.classList.add("bg-info");
+  };
+
   return (
-    <div className="w-50 border border-primary shadow box-shadow">
+    <div className="border rounded w-50 m-auto mt-3 p-3 border-primary shadow box-shadow">
       <h1 ref={ele}>Home</h1>
       <button
         onClick={() => {
@@ -22,10 +35,30 @@ export default function Home() {
       <Link to="right">
         <button>Right</button>
       </Link>
-      <p>text1</p>
-      <p>text2</p>
-      <p>text3</p>
-      <p>text4</p>
+      <p
+        className="mt-2 text-primary"
+        ref={(el) => (ptags.current[0] = el)}
+        onClick={(p) => ChangeStyling(p)}>
+        Product1
+      </p>
+      <p
+        className="mt-2 text-primary"
+        ref={(el) => (ptags.current[1] = el)}
+        onClick={(p) => ChangeStyling(p)}>
+        Product2
+      </p>
+      <p
+        className="mt-2 text-primary"
+        ref={(el) => (ptags.current[2] = el)}
+        onClick={(p) => ChangeStyling(p)}>
+        Product3
+      </p>
+      <p
+        className="mt-2 text-primary"
+        ref={(el) => (ptags.current[3] = el)}
+        onClick={(p) => ChangeStyling(p)}>
+        Product4
+      </p>
       <Outlet />
     </div>
   );

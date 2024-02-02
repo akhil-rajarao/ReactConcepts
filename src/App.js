@@ -11,7 +11,7 @@ import ErrorPage from "./components/ErrorPage";
 function App() {
   function Headerss() {
     return (
-      <div className="d-flex gap-3 justify-content-center">
+      <div className="d-flex gap-3 mt-3 justify-content-center">
         <Link to="/">
           <button className="btn btn-primary">H</button>
         </Link>
