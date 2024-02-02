@@ -1,11 +1,20 @@
 /** @format */
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 export default function Home() {
   const ele = useRef(null);
   const ptags = useRef([]);
+  const [products, setproducts] = useState([]);
+  const GetData = async () => {
+    const ProductData = await fetch("https://fakestoreapi.com/products");
+    const apidata = await ProductData.json();
+    setproducts(apidata);
+  };
+  useEffect(() => {
+    GetData();
+  },[]);
 
   const ChangeStyling = (e) => {
     for (let x of ptags.current) {
@@ -18,6 +27,17 @@ export default function Home() {
     e.target.classList.add("text-danger");
     e.target.classList.add("bg-info");
   };
+  const ProductsMapping = ()=>{
+    return products.map((item, index) => (
+      <p
+        className="mt-2 text-primary"
+        ref={(el) => (ptags.current[index] = el)}
+        onClick={(p) => ChangeStyling(p)}>
+        {item?.title}
+      </p>
+    ))
+  }
+  console.log(products)
 
   return (
     <div className="border rounded w-50 m-auto mt-3 p-3 border-primary shadow box-shadow">
@@ -35,30 +55,9 @@ export default function Home() {
       <Link to="right">
         <button>Right</button>
       </Link>
-      <p
-        className="mt-2 text-primary"
-        ref={(el) => (ptags.current[0] = el)}
-        onClick={(p) => ChangeStyling(p)}>
-        Product1
-      </p>
-      <p
-        className="mt-2 text-primary"
-        ref={(el) => (ptags.current[1] = el)}
-        onClick={(p) => ChangeStyling(p)}>
-        Product2
-      </p>
-      <p
-        className="mt-2 text-primary"
-        ref={(el) => (ptags.current[2] = el)}
-        onClick={(p) => ChangeStyling(p)}>
-        Product3
-      </p>
-      <p
-        className="mt-2 text-primary"
-        ref={(el) => (ptags.current[3] = el)}
-        onClick={(p) => ChangeStyling(p)}>
-        Product4
-      </p>
+      <h1 className="text-secondary">{products?.title}</h1>
+      {ProductsMapping()}
+      
       <Outlet />
     </div>
   );
