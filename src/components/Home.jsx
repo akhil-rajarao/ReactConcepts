@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import GetapiHook from "../utilities/GetapiHook";
 
 export default function Home() {
   const ele = useRef(null);
@@ -12,9 +13,11 @@ export default function Home() {
     const apidata = await ProductData.json();
     setproducts(apidata);
   };
-  useEffect(() => {
-    GetData();
-  },[]);
+  // useEffect(() => {
+  //   GetData();
+  // }, []);
+
+  const productsList= GetapiHook("https://fakestoreapi.com/products")
 
   const ChangeStyling = (e) => {
     for (let x of ptags.current) {
@@ -27,17 +30,16 @@ export default function Home() {
     e.target.classList.add("text-danger");
     e.target.classList.add("bg-info");
   };
-  const ProductsMapping = ()=>{
-    return products.map((item, index) => (
+  const ProductsMapping = () => {
+    return productsList.map((item, index) => (
       <p
-        className="mt-2 text-primary"
+        className="mt-2 text-primary cursor-pointer"
         ref={(el) => (ptags.current[index] = el)}
         onClick={(p) => ChangeStyling(p)}>
         {item?.title}
       </p>
-    ))
-  }
-  console.log(products)
+    ));
+  };
 
   return (
     <div className="border rounded w-50 m-auto mt-3 p-3 border-primary shadow box-shadow">
@@ -55,10 +57,9 @@ export default function Home() {
       <Link to="right">
         <button>Right</button>
       </Link>
+      <Outlet />
       <h1 className="text-secondary">{products?.title}</h1>
       {ProductsMapping()}
-      
-      <Outlet />
     </div>
   );
 }
