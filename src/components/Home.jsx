@@ -1,18 +1,18 @@
 /** @format */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, {    useRef } from "react";
 import { Link, Outlet } from "react-router-dom";
 import GetapiHook from "../utilities/GetapiHook";
 
 export default function Home() {
   const ele = useRef(null);
   const ptags = useRef([]);
-  const [products, setproducts] = useState([]);
-  const GetData = async () => {
-    const ProductData = await fetch("https://fakestoreapi.com/products");
-    const apidata = await ProductData.json();
-    setproducts(apidata);
-  };
+  // const [products, setproducts] = useState([]);
+  // const GetData = async () => {
+  //   const ProductData = await fetch("https://fakestoreapi.com/products");
+  //   const apidata = await ProductData.json();
+  //   setproducts(apidata);
+  // };
   // useEffect(() => {
   //   GetData();
   // }, []);
@@ -23,17 +23,17 @@ export default function Home() {
     for (let x of ptags.current) {
       x.classList.remove("text-danger");
       console.log(x.classList);
-      x.classList.add("text-primary");
+      x.classList.add("text-secondary");
       x.classList.remove("bg-info");
     }
-    e.target.classList.remove("text-primary");
+    e.target.classList.remove("text-secondary");
     e.target.classList.add("text-danger");
     e.target.classList.add("bg-info");
   };
   const ProductsMapping = () => {
     return productsList.map((item, index) => (
       <p
-        className="mt-2 text-primary cursor-pointer"
+        className="mt-2 text-secondary cursor-pointer"
         ref={(el) => (ptags.current[index] = el)}
         onClick={(p) => ChangeStyling(p)}>
         {item?.title}
@@ -58,7 +58,7 @@ export default function Home() {
         <button>Right</button>
       </Link>
       <Outlet />
-      <h1 className="text-secondary">{products?.title}</h1>
+      {/* <h1 className="text-secondary">{products?.title}</h1> */}
       {ProductsMapping()}
     </div>
   );
