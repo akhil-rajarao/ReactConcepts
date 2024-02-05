@@ -32,7 +32,8 @@ export default function Home() {
   const ProductsMapping = () => {
     return productsList.map((item, index) => (
       <p
-        className="mt-2 text-secondary cursor-pointer" key={index}
+        className="mt-2 text-secondary cursor-pointer"
+        key={index}
         ref={(el) => (ptags.current[index] = el)}
         onClick={(p) => ChangeStyling(p)}>
         {item?.title}
