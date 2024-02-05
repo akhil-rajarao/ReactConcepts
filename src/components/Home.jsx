@@ -1,10 +1,12 @@
 /** @format */
 
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { Link, Outlet } from "react-router-dom";
 import GetapiHook from "../utilities/GetapiHook";
+import { context } from "../App";
 
 export default function Home() {
+  const products = useContext(context)
   const ele = useRef(null);
   const ptags = useRef([]);
   // const [products, setproducts] = useState([]);
@@ -58,7 +60,7 @@ export default function Home() {
         <button>Right</button>
       </Link>
       <Outlet />
-      {/* <h1 className="text-secondary">{products?.title}</h1> */}
+      <h1 className="text-secondary">{products?.title}</h1>
       {ProductsMapping()}
     </div>
   );

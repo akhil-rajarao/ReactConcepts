@@ -7,9 +7,10 @@ import Page from "./components/Page";
 import ContactUs from "./components/ContactUs";
 import About from "./components/About";
 import ErrorPage from "./components/ErrorPage";
+import { createContext } from "react";
 
+export const context = createContext();
 function App() {
-
   function Headerss() {
     return (
       <div className="d-flex gap-3 mt-3 justify-content-center">
@@ -29,38 +30,48 @@ function App() {
     );
   }
 
+  const ProductDetail = {
+    id: 1,
+    title: "bag",
+    price: "1200$",
+    category: "Personal",
+    description: "Travel bag",
+  };
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Headerss />
-        <Routes>
-          <Route
-            path="/"
-            element={<Home />}>
+    <context.Provider value={ProductDetail}>
+      <div className="App">
+        <BrowserRouter>
+          <Headerss />
+          <Routes>
             <Route
-              path="left"
-              element={<LeftComponent />}
-            />
+              path="/"
+              element={<Home />}>
+              <Route
+                path="left"
+                element={<LeftComponent />}
+              />
+              <Route
+                path="right"
+                element={<RightComponent />}
+              />
+            </Route>
             <Route
-              path="right"
-              element={<RightComponent />}
-            />
-          </Route>
-          <Route
-            path="/page/:id/:index"
-            element={<Page />}></Route>
-          <Route
-            path="/contact"
-            element={<ContactUs />}></Route>
-          <Route
-            path="/about"
-            element={<About />}></Route>
-          <Route
-            path="*"
-            element={<ErrorPage />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+              path="/page/:id/:index"
+              element={<Page />}></Route>
+            <Route
+              path="/contact"
+              element={<ContactUs />}></Route>
+            <Route
+              path="/about"
+              element={<About />}></Route>
+            <Route
+              path="*"
+              element={<ErrorPage />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </context.Provider>
   );
 }
 
