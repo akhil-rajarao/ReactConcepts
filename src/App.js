@@ -32,7 +32,7 @@ function App() {
 
   const ProductDetail = {
     id: 1,
-    title: "bag",
+    title: "List Of products",
     price: "1200$",
     category: "Personal",
     description: "Travel bag",

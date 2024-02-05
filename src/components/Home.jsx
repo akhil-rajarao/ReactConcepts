@@ -6,20 +6,11 @@ import GetapiHook from "../utilities/GetapiHook";
 import { context } from "../App";
 
 export default function Home() {
-  const products = useContext(context)
+  const products = useContext(context);
   const ele = useRef(null);
   const ptags = useRef([]);
-  // const [products, setproducts] = useState([]);
-  // const GetData = async () => {
-  //   const ProductData = await fetch("https://fakestoreapi.com/products");
-  //   const apidata = await ProductData.json();
-  //   setproducts(apidata);
-  // };
-  // useEffect(() => {
-  //   GetData();
-  // }, []);
-
   const productsList = GetapiHook("https://fakestoreapi.com/products");
+  console.log(productsList);
 
   const ChangeStyling = (e) => {
     for (let x of ptags.current) {
@@ -32,6 +23,13 @@ export default function Home() {
     e.target.classList.add("bg-info");
   };
   const ProductsMapping = () => {
+    if (!productsList || productsList.length === 0) {
+      return (
+        <div
+          class="spinner-border text-primary"
+          role="status"></div>
+      );
+    }
     return productsList.map((item, index) => (
       <p
         className="mt-2 text-secondary cursor-pointer"
@@ -60,7 +58,7 @@ export default function Home() {
         <button>Right</button>
       </Link>
       <Outlet />
-      <h1 className="text-secondary">{products?.title}</h1>
+      <p className="mt-3">{products?.title.toUpperCase()}</p>
       {ProductsMapping()}
     </div>
   );
